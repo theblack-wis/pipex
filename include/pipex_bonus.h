@@ -1,47 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   pipex_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aerrajiy <aerrajiy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/16 21:46:39 by aerrajiy          #+#    #+#             */
-/*   Updated: 2022/12/26 22:46:32 by aerrajiy         ###   ########.fr       */
+/*   Created: 2022/12/26 16:28:16 by aerrajiy          #+#    #+#             */
+/*   Updated: 2022/12/26 23:09:21 by aerrajiy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#ifndef PIPEX_BONUS_H
+# define PIPEX_BONUS_H
+
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
 # include <errno.h>
 
-// structs to mak life easy and f*k norm
-typedef struct s_proc
+typedef struct s_data
 {
-	int		fd[2];
-	int		proc1;
-	int		proc2;
-	int		pip;
-	int		status;
-	char	**splited;
-	char	**command;
-	char	*path;
-}	t_proc;
+    int infile;
+    int outfile;
+    int fd[2];
+    int proc1;
+    int pip;
+    int start;
+}   t_data_file;
 
-// tools
-char	*ft_strjoin(char const *path, char *slash, char const *cmd);
-size_t	ft_strlen(const char *str);
-char	*ft_strstr(const char *haystack, const char *needle);
+void wis_execute_first(char *cmd, char *env[], int intfile);
+void wis_execute_last(char *cmd, char *env[], int outfile);
+void execute_c(char *cmd, char *env[]);
 char	**read_and_split_path(char *env[]);
-void	check_path_error(char *path);
 void	run_execve(char *cmd, char *env[]);
-
-char	**ft_split(char const *s, char c);
-char	*insert_cpy(char **ptr, char *str, char c);
-int		words_count(char *s, char c);
-void	free_me(char **pointer);
 
 #endif

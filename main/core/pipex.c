@@ -6,45 +6,17 @@
 /*   By: aerrajiy <aerrajiy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 01:51:30 by aerrajiy          #+#    #+#             */
-/*   Updated: 2022/12/23 22:02:16 by aerrajiy         ###   ########.fr       */
+/*   Updated: 2022/12/26 23:38:42 by aerrajiy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/pipex.h"
 
-void	run_execve(char *cmd, char *env[])
-{
-	t_proc	data;
-	int		i;
-	int		k;
-
-	i = 0;
-	k = 1;
-	data.splited = read_and_split_path(env);
-	data.command = ft_split(cmd, ' ');
-	data.path = cmd;
-	if (access(data.path, F_OK) != -1)
-		k = 0;
-	while (k && data.splited && data.splited[i])
-	{
-		data.path = ft_strjoin(data.splited[i++], "/", data.command[0]);
-		if (access(data.path, F_OK) != -1)
-			break ;
-		free(data.path);
-	}
-	free_me(data.splited);
-	if (execve(data.path, data.command, env) == -1)
-	{
-		check_path_error(data.path);
-		exit(1);
-	}
-}
-
 void	execute_second_command(char *argv[], char *env[], t_proc var)
 {
 	int	out_file;
 
-	out_file = open(argv[4], O_CREAT | O_TRUNC | O_RDWR, 0777);
+	out_file = open(argv[4], O_CREAT | O_TRUNC | O_RDWR, 0644);
 	if (out_file == -1)
 		perror("Error : can't open outfile");
 	if (dup2(out_file, 1) == -1)
