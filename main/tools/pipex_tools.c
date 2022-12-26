@@ -6,7 +6,7 @@
 /*   By: aerrajiy <aerrajiy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 19:11:34 by aerrajiy          #+#    #+#             */
-/*   Updated: 2022/12/26 23:36:31 by aerrajiy         ###   ########.fr       */
+/*   Updated: 2022/12/27 00:16:18 by aerrajiy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,10 @@ void	run_execve(char *cmd, char *env[])
 			break ;
 		free(data.path);
 	}
+
 	free_me(data.splited);
-	if (execve(data.path, data.command, env) == -1)
+	
+	if (execve(data.path, data.command, NULL) == -1)
 	{
 		check_path_error(data.path);
 		exit(1);

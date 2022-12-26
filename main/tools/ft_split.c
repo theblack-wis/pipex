@@ -6,7 +6,7 @@
 /*   By: aerrajiy <aerrajiy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 21:48:46 by aerrajiy          #+#    #+#             */
-/*   Updated: 2022/12/23 22:02:10 by aerrajiy         ###   ########.fr       */
+/*   Updated: 2022/12/27 00:16:43 by aerrajiy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	free_me(char **pointer)
 	int	i;
 
 	i = 0;
-	while (pointer[i])
+	while (pointer && pointer[i])
 	{
 		free(pointer[i]);
 		i++;
