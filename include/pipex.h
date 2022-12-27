@@ -6,7 +6,7 @@
 /*   By: aerrajiy <aerrajiy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 21:46:39 by aerrajiy          #+#    #+#             */
-/*   Updated: 2022/12/26 22:46:32 by aerrajiy         ###   ########.fr       */
+/*   Updated: 2022/12/27 21:18:09 by aerrajiy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ typedef struct s_proc
 }	t_proc;
 
 // tools
-char	*ft_strjoin(char const *path, char *slash, char const *cmd);
+char	*ft_path_joinner(char const *path, char *slash, char const *cmd);
 size_t	ft_strlen(const char *str);
 char	*ft_strstr(const char *haystack, const char *needle);
 char	**read_and_split_path(char *env[]);

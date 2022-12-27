@@ -6,7 +6,7 @@
 /*   By: aerrajiy <aerrajiy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 19:11:34 by aerrajiy          #+#    #+#             */
-/*   Updated: 2022/12/27 00:22:17 by aerrajiy         ###   ########.fr       */
+/*   Updated: 2022/12/27 21:17:23 by aerrajiy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	run_execve(char *cmd, char *env[])
 		k = 0;
 	while (k && data.splited && data.splited[i])
 	{
-		data.path = ft_strjoin(data.splited[i++], "/", data.command[0]);
+		data.path = ft_path_joinner(data.splited[i++], "/", data.command[0]);
 		if (access(data.path, X_OK) != -1)
 			break ;
 		free(data.path);

@@ -6,7 +6,7 @@
 /*   By: aerrajiy <aerrajiy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 18:11:12 by aerrajiy          #+#    #+#             */
-/*   Updated: 2022/12/27 00:26:08 by aerrajiy         ###   ########.fr       */
+/*   Updated: 2022/12/28 00:33:32 by aerrajiy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ void	wis_execute_first(char *cmd, char *env[], int intfile)
 	data.proc1 = fork();
 	if (data.proc1 == 0)
 	{
+		if (intfile < 0)
+			exit(1);
 		close(data.fd[0]);
 		dup2(intfile, 0);
 		dup2(data.fd[1], 1);
@@ -79,4 +81,25 @@ void	execute_c(char *cmd, char *env[])
 		close(fd[1]);
 		run_execve(cmd, env);
 	}
+}
+
+void	ft_putendl_fd(char *s, int fd)
+{
+	int	i;
+
+	i = 0;
+	if (s == NULL)
+		return ;
+	while (s[i])
+	{
+		write(fd, &s[i], 1);
+		i++;
+	}
+	write(fd, "\n", 1);
+}
+
+void	close_fd(int *fd)
+{
+	close(fd[0]);
+	close(fd[1]);
 }
