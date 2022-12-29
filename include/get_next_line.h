@@ -6,7 +6,7 @@
 /*   By: aerrajiy <aerrajiy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 21:33:50 by aerrajiy          #+#    #+#             */
-/*   Updated: 2022/12/28 00:34:48 by aerrajiy         ###   ########.fr       */
+/*   Updated: 2022/12/29 03:29:32 by aerrajiy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	*split_line(char *saved);
 char	*get_rest_data(char *saved);
 
 char	*ft_strdup(char *s);
-char	*ft_strjoin(char *s1, char *s2);
+char	*ft_strjoin_gnl(char *s1, char *s2);
 size_t	ft_strlen(char *s);
 char	*ft_strchr(char *s, int c);
 

@@ -6,11 +6,25 @@
 /*   By: aerrajiy <aerrajiy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 19:11:34 by aerrajiy          #+#    #+#             */
-/*   Updated: 2022/12/27 21:17:23 by aerrajiy         ###   ########.fr       */
+/*   Updated: 2022/12/29 03:13:15 by aerrajiy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/pipex.h"
+
+void	ft_putstr_fd(char *s, int fd)
+{
+	int	i;
+
+	i = 0;
+	if (s == NULL)
+		return ;
+	while (s[i])
+	{
+		write(fd, &s[i], 1);
+		i++;
+	}
+}
 
 char	**read_and_split_path(char *env[])
 {
@@ -26,11 +40,15 @@ char	**read_and_split_path(char *env[])
 	return (NULL);
 }
 
-void	check_path_error(char *path)
+void	check_path_error(char *path, char *cmd)
 {
+	char	*msg;
+
 	if (access(path, X_OK) == -1)
 	{
-		write(2, "pip : command not found\n", 25);
+		msg = ft_strjoin(cmd, ":", " command not found\n");
+		ft_putstr_fd(msg, 2);
+		free(msg);
 		exit(127);
 	}
 }
@@ -50,7 +68,7 @@ void	run_execve(char *cmd, char *env[])
 		k = 0;
 	while (k && data.splited && data.splited[i])
 	{
-		data.path = ft_path_joinner(data.splited[i++], "/", data.command[0]);
+		data.path = ft_strjoin(data.splited[i++], "/", data.command[0]);
 		if (access(data.path, X_OK) != -1)
 			break ;
 		free(data.path);
@@ -58,7 +76,7 @@ void	run_execve(char *cmd, char *env[])
 	free_me(data.splited);
 	if (execve(data.path, data.command, NULL) == -1)
 	{
-		check_path_error(data.path);
+		check_path_error(data.path, cmd);
 		exit(1);
 	}
 }

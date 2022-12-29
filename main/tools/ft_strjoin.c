@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_path_joinner.c                                  :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aerrajiy <aerrajiy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 22:20:37 by aerrajiy          #+#    #+#             */
-/*   Updated: 2022/12/27 21:17:48 by aerrajiy         ###   ########.fr       */
+/*   Updated: 2022/12/23 22:02:01 by aerrajiy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include  "../../include/pipex.h"
 
-char	*ft_path_joinner(char const *path, char *slash, char const *cmd)
+char	*ft_strjoin(char const *path, char *slash, char const *cmd)
 {
 	int		len;
 	int		i;

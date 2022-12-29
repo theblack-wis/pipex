@@ -6,7 +6,7 @@
 /*   By: aerrajiy <aerrajiy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 16:28:16 by aerrajiy          #+#    #+#             */
-/*   Updated: 2022/12/28 00:35:05 by aerrajiy         ###   ########.fr       */
+/*   Updated: 2022/12/29 04:34:57 by aerrajiy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,27 +19,31 @@
 # include <fcntl.h>
 # include <errno.h>
 
-# define HERE_DOC ".data_heroc_store"
-
 typedef struct s_data
 {
-	int	infile;
-	int	outfile;
 	int	fd[2];
 	int	proc1;
 	int	pip;
-	int	start;
-	int	flag;
 }	t_data_file;
 
-void	wis_execute_first(char *cmd, char *env[], int intfile);
-void	wis_execute_last(char *cmd, char *env[], int outfile);
-void	execute_c(char *cmd, char *env[]);
+typedef struct s_proc
+{
+	int		infile;
+	int		outfile;
+	int		start;
+	int		check;
+	int		argc;
+	char	**argv;
+}	t_process;
+
+void	execute_c(char *cmd, char *env[], t_process data);
 char	**read_and_split_path(char *env[]);
 void	run_execve(char *cmd, char *env[]);
-int		ft_strcmp(const char *s1, const char *s2);
-void	here_doc(char *limiter);
-void	close_fd(int *fd);
+void	ft_putstr_fd(char *s, int fd);
+char	*ft_strjoin(char const *path, char *slash, char const *cmd);
 char	*get_next_line(int fd);
+int		ft_strcmp(const char *s1, const char *s2);
+void	heredoc(char *limiter);
+void	read_heredoc(int *fd, char *limiter);
 
 #endif

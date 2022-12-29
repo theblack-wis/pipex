@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   pipex_heredoc.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aerrajiy <aerrajiy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/27 21:24:39 by aerrajiy          #+#    #+#             */
-/*   Updated: 2022/12/28 00:33:37 by aerrajiy         ###   ########.fr       */
+/*   Created: 2022/12/29 03:24:36 by aerrajiy          #+#    #+#             */
+/*   Updated: 2022/12/29 04:37:03 by aerrajiy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,20 +30,41 @@ int	ft_strcmp(const char *s1, const char *s2)
 	return (1);
 }
 
-void	here_doc(char *limiter)
+void	read_heredoc(int *fd, char *limiter)
 {
 	char	*line;
-	int		fd;
 
-	unlink(HERE_DOC);
-	fd = open(HERE_DOC, O_CREAT | O_RDWR | O_TRUNC, 0644);
+	close(fd[0]);
+	ft_putstr_fd("heredoc> ", 1);
 	line = get_next_line(0);
 	while (line)
 	{
-		if (!ft_strcmp(line, limiter))
-			ft_putendl_fd(line, fd);
-		else
-			break ;
+		ft_putstr_fd("heredoc> ", 1);
 		line = get_next_line(0);
+		if (ft_strcmp(line, limiter))
+		{
+			close(fd[1]);
+			exit(0);
+		}
+		ft_putstr_fd(line, fd[1]);
+		write(fd[1], "\n", 1);
+	}
+	close(fd[1]);
+}
+
+void	heredoc(char *limiter)
+{
+	t_data_file	data;
+
+	data.pip = pipe(data.fd);
+	data.proc1 = fork();
+	if (data.proc1 == 0)
+		read_heredoc(data.fd, limiter);
+	else
+	{
+		close(data.fd[1]);
+		dup2(data.fd[0], 0);
+		close(data.fd[0]);
+		waitpid(data.proc1, NULL, 0);
 	}
 }

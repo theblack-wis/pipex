@@ -6,7 +6,7 @@
 /*   By: aerrajiy <aerrajiy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 21:23:11 by aerrajiy          #+#    #+#             */
-/*   Updated: 2022/12/27 21:20:40 by aerrajiy         ###   ########.fr       */
+/*   Updated: 2022/12/29 03:31:15 by aerrajiy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	*read_data_by_buffer(int fd, char *saved)
 		if (i <= 0)
 			break ;
 		buffer[i] = '\0';
-		saved = ft_strjoin(saved, buffer);
+		saved = ft_strjoin_gnl(saved, buffer);
 	}
 	free(buffer);
 	return (saved);
